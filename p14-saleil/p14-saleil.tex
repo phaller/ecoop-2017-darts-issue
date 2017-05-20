@@ -1,0 +1,110 @@
+
+\documentclass[a4paper,UKenglish]{darts}
+
+\usepackage{microtype}
+
+\bibliographystyle{plainurl}
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\title{Interprocedural Specialization of Higher-Order Dynamic Languages Without Static Analysis (Artifact)\footnote{This artifact is a companion of the paper:  Baptiste Saleil and Marc Feeley, ``Interprocedural Specialization of Higher-Order Dynamic Languages Without Static Analysis'', Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain.}}
+\titlerunning{Interprocedural Specialization of Higher-Order Dynamic Languages Without Static Analysis (Artifact)}
+
+\author[1]{Baptiste Saleil}
+\author[2]{Marc Feeley}
+
+\affil[1]{Universit\'e de Montr\'eal\\
+  Montreal, Quebec, Canada\\
+  \texttt{baptiste.saleil@umontreal.ca}}
+\affil[2]{Universit\'e de Montr\'eal\\
+  Montreal, Quebec, Canada\\
+  \texttt{feeley@iro.umontreal.ca}}
+
+\authorrunning{B., Saleil and M., Feeley}
+\Copyright{Baptiste Saleil and Marc Feeley}
+
+\subjclass{D.3.4 Processors}
+\keywords{Just-in-time compilation, Interprocedural optimization, Dynamic language, Higher-order function, Scheme}
+
+\Volume{3}
+\Issue{2}
+\Article{14}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This artifact is based on LC, a research oriented JIT compiler for Scheme.
+    The compiler is extended to allow interprocedural, type based, code specialization
+    using the technique and its implementation presented in the paper.
+    Because the technique is directly implemented in LC, the package contains the build
+    of the compiler used for our experiments.
+    To support repeatability, the artifact allows the user to
+    easily extract the data presented in the paper such as the number of executed type
+    checks or the generated code size.
+    The user can repeat the experiments using a set of standard benchmarks as well as its own programs.
+    Instructions for building the compiler from scratch are also provided.
+\end{abstract}
+
+\begin{scope}
+    The artifact is designed to support repeatability of all the experiments presented in the paper.
+    Users can obtain the result from the metrics used for the experiments such as the number of executed type checks,
+    the size of the generated machine code or the execution time using a set of standard benchmarks as well
+    as their own Scheme programs.
+    A tool allowing to automatically gather the data presented in the paper is also included in the artifact.
+\end{scope}
+
+\begin{content}
+
+    This artifact contains a build of the LC compiler used for the experiments presented in the paper.
+    The archive contains a virtual appliance packaged using the Open Virtualization Format (OVF) and
+    the artifact documentation.
+    This appliance can be imported and started using the virtualization software \textit{VirtualBox}.
+
+    When the system is booted, the user can find the artifact in a folder named \texttt{artifact} on the desktop.
+    To facilitate the use of the artifact, two windows are opened on boot:
+    \begin{itemize}
+        \item A file explorer window showing the content of the \texttt{artifact} folder
+        \item A terminal window opened in the \texttt{artifact} folder
+    \end{itemize}
+
+    The \texttt{artifact} folder contains:
+
+    \begin{itemize}
+        \item The artifact documentation
+        \item The paper
+        \item The sources of the compiler
+        \item The benchmarks used for the experiments
+    \end{itemize}
+\end{content}
+
+\begin{getting}
+    The latest version of the compiler is available on Github:
+    {\url https://github.com/bsaleil/lc}
+\end{getting}
+
+\begin{platforms}
+    Because the compiler targets x86-64 assembly,
+    the artifact must be executed on a platform using a x86-64 CPU supporting SSE extensions.
+    The artifact is known to work on any operating system satisfying this condition and running Oracle VirtualBox
+    version~5 ({\url https://www.virtualbox.org/}) with at least 8~GB of free
+    space on disk and at least 3~GB of free space in RAM.
+\end{platforms}
+
+\license{BSD-3-Clause ({\url https://opensource.org/licenses/BSD-3-Clause})}
+
+\mdsum{7a431b74c95241dc09445eeed4790ca0}
+
+\artifactsize{2.8 GB}
+
+\end{document}
