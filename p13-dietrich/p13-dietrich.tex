@@ -1,0 +1,174 @@
+% This is a template for producing artefact descriptions associated with ECOOP 2017 papers
+%
+% Following is the notice from Camil Demetrescu's ECOOP 2016 template on which this
+% template is based:
+% This is a template for producing artefact descriptions associated with ECOOP papers
+% Adapted from the standard LIPIcs template by Camil Demetrescu
+% See lipics-manual.pdf for further information.
+% April 22, 2015
+
+\documentclass[a4paper,UKenglish]{darts}
+% for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+% for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% ARTEFACT: Include the following input command here
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ARTEFACT: Please use the same title as the corresponding ECOOP paper and append the text "(Artefact)"
+% ARTEFACT: Add as a footnote the reference to the corresponding ECOOP paper
+\title{Evil Pickles: DoS attacks based on Object-Graph Engineering (Artifact)\footnote{This artifact is a companion of the paper:  Jens Dietrich and Kamil Jezek and Shawn Rasheed and Amjed Tahir and Alex Potanin, ``Evil Pickles: DoS attacks based on Object-Graph Engineering'', Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain. This work was supported by a gift to the first author from Oracle Labs Australia}}
+\titlerunning{ Evil Pickles (Artifact)} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTEFACT: Authors may not be exactly the same as the ECOOP paper, e.g., you may want to include authors who contributed to the preparation of the artefact, but not to the ECOOP companion paper
+%% Please provide for each author the \author and \affil macro, even when authors have the same affiliation, i.e. for each author there needs to be the  \author and \affil macros
+
+\author[1]{Jens Dietrich}
+\author[2]{Kamil Jezek}
+\author[3]{Shawn Rasheed}
+\author[4]{Amjed Tahir}
+\author[5]{Alex Potanin}
+\affil[1,3,4]{\hspace{0.3cm}School of Engineering and Advanced Technology, Massey University\\ Palmerston North, New Zealand 
+	\\ \texttt{\{j.b.dietrich,s.rasheed,a.tahir\}@massey.ac.nz}}
+\affil[2]{NTIS – New Technologies for the Information Society \\ Faculty of Applied Sciences, University of West Bohemia\\ Pilsen, Czech Republic \\ \texttt{kjezek@kiv.zcu.cz}}
+\affil[5]{School of Engineering and Computer Science
+	 \\ Victoria University of Wellington, Wellington, New Zealand \\ \texttt{alex@ecs.vuw.ac.nz}}
+
+\authorrunning{
+	Dietrich et al.
+} 
+
+\Copyright{Jens Dietrich, Kamil Jezek, Shawn Rasheed, Amjed Tahir and Alex Potanin}
+
+\subjclass{
+	D.2.2 Design Tools and Techniques 
+	D.2.4 Software/Program Verification
+	D.3.3 Language Constructs and Features
+	D.3.4 Processors
+	D.4.6 Security and Protection
+	E.2 Data Storage Representations	
+}
+% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
+\keywords{serialisation, denial of service, degradation of service, Java, C\#, JavaScript, Ruby, vulnerabilities, library design, collection libraries}
+
+
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{3}
+\Issue{2}
+\Article{13}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This artefact demonstrates the effects of the serialisation vulnerabilities described in the companion paper. It is composed of three components: scripts, including source code, for Java, Ruby and C\# serialisation-vulnerabilities, two case studies that demonstrate attacks based on the vulnerabilities, and a contracts-based mitigation strategy for serialisation-based attacks on Java applications. The artefact allows users to witness how the serialisation-based vulnerabilities result in behavior that can be used in security attacks. It also supports the repeatability of the case study experiments and the benchmark for the mitigation measures proposed in the paper. Instructions for running the tasks are provided along with a description of the artefact setup.
+  \end{abstract}
+
+% ARTEFACT: please stick to the structure of 7 sections provided below
+
+% ARTEFACT: section on the scope of the artefact (what claims of the paper are intended to be backed by this artefact?)
+\begin{scope}
+  The artefact is designed to support repeatability of the experiments of the companion paper. It has scripts, including sources, for the security vulnerabilities described in the paper for the programming languages: Java, C\# and Ruby, and a case study that demonstrates how the Java vulnerabilities can be used in attacks on two widely used servers, Jenkins deployed on Tomcat and JBoss.  It also includes a secure drop-in replacement for \texttt{ObjectInputStream} that mitigates attacks based on the described vulnerabilities and a DaCapo-based\cite{blackburn2006dacapo} benchmark to assess the overhead of the instrumentation that implements the contracts-based mitigation strategy.
+  
+\end{scope}
+
+% ARTEFACT: section on the contents of the artefact (code, data, etc.)
+\begin{content}
+  The artefact package includes:
+
+  \begin{itemize}
+  \item Script, \texttt{\url{~/evilpickles/run-java.sh}}, including source code for the Java vulnerabilities (SerialDOS, Pufferfish and Turtles all The Way down) in \texttt{\url{~/evilpickles/java}}
+  \item Script, \texttt{\url{~/evilpickles/run-dotnet.sh}}, including source code for the C\# vulnerabilities (SerialDOS, Turtles all The Way Down) in \texttt{\url{~/evilpickles/dotnet}}
+    \item Script, \texttt{\url{~/evilpickles/run-ruby.sh}}, including source code for the Ruby vulnerability (SerialDOS) in \texttt{\url{~/evilpickles/ruby}}
+  \item JBoss and Jenkins servers for the case study experiments in \texttt{\url{~/evilpickles/case-study}}
+  \item Scripts for the case study experiments: \texttt{\url{~/evilpickles/case-study/run-jenkins.sh}} and \texttt{\url{~/evilpickles/case-study/run-jboss.sh}}
+  \item Secure replacement for \texttt{ObjectInputStream} that uses contracts-based instrumentation to mitigate the attacks in \texttt{\url{~/evilpickles/mitigation/dyn}} and script to run the experiment: \texttt{\url{~/evilpickles/mitigation/dyn/run-mitigation.sh}}
+  \item DaCapo-based benchmark for the instrumentation that can be executed with the script, \texttt{\url{~/evilpickles/mitigation/dyn/dacapo-benchmark.sh}}
+    \item Detailed instructions for using the artefact in \texttt{\url{~/evilpickles/instructions.md}}
+
+  \end{itemize}
+   To simplify the setup for the experiments, we provide a VirtualBox disk
+  image containing a Linux distribution fully configured for
+  conducting the experiments. The image contains Ubuntu 16.04.1 server edition along with the source code and the JBoss and Jenkins configured for the case study experiments.
+\end{content} 
+
+% ARTEFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artefact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artefact (e.g., on github)
+  The latest version of our code is available on:
+  \texttt{{\url {https://bitbucket.org/jensdietrich/evilpickles}}}
+
+\end{getting} 
+
+% ARTEFACT: section specifying the platforms on which the artefact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+  The artefact is known to work on any platform running Oracle VirtualBox
+  version~5 \\({\url {https://www.virtualbox.org/}}). The experiments were conducted on a host machine with 8GB RAM with a processor: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+
+\end{platforms}
+
+% ARTEFACT: section specifying the license under which the artefact is
+% made available
+\license{EPL-1.0 ({\url http://www.eclipse.org/legal/epl-v10.html})}
+
+% ARTEFACT: section specifying the md5 sum of the artefact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{1e7e3686b67256b336dbd24eaa149854}
+
+% ARTEFACT: section specifying the size of the artefact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{2.7 GB}
+
+
+% ARTEFACT: optional appendix
+%\appendix
+
+%\section{My Appendix}
+
+% Add here any further material you would like to include. For instance, if the artefact is itself a PDF document, add it here.
+% https://s3-us-west-2.amazonaws.com/evilpickles-artefact/ecoop-2017-artefact-evaluation_v4.ova
+
+% ARTEFACT: include here any additional references, if needed...
+
+%% Either use bibtex (recommended), but commented out in this sample
+
+%\bibliography{dummybib}
+
+%% .. or use the thebibliography environment explicitely
+
+
+\begin{thebibliography}{50}
+
+  \bibitem{blackburn2006dacapo} Blackburn et al. \textsl{The DaCapo benchmarks: Java benchmarking development and analysis}. Proceedings OOPSLA '06, ACM, 2006
+
+
+\end{thebibliography}
+
+
+\end{document}
