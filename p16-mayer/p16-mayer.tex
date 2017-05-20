@@ -1,0 +1,158 @@
+% This is a template for producing artifact descriptions associated with ECOOP 2017 papers
+%
+% Following is the notice from Camil Demetrescu's ECOOP 2016 template on which this
+% template is based:
+% This is a template for producing artifact descriptions associated with ECOOP papers
+% Adapted from the standard LIPIcs template by Camil Demetrescu
+% See lipics-manual.pdf for further information.
+% April 22, 2015
+
+\documentclass[a4paper,UKenglish]{darts}
+% for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+% for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% ARTIFACT: Include the following input command here
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ARTIFACT: Please use the same title as the corresponding ECOOP paper and append the text "(Artifact)"
+% ARTIFACT: Add as a footnote the reference to the corresponding ECOOP paper
+\title{Proactive Synthesis of Recursive Tree-to-String Functions from Examples (Artifact)\footnote{This artifact is a companion of the paper:  Mika\"el Mayer, Jad Hamza and Viktor Kuncak, ``Proactive Synthesis of Recursive Tree-to-String Functions from Examples'', Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain. This work was supported in part by European Research Council (ERC) Project Implicit Programming and an EPFL-Inria Post-Doctoral grant.}}
+\titlerunning{Proactive Synthesis of Recursive Tree-to-String Functions from Examples (Artifact)} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the ECOOP paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the ECOOP companion paper
+%% Please provide for each author the \author and \affil macro, even when authors have the same affiliation, i.e. for each author there needs to be the  \author and \affil macros
+\author[1]{Mika\"el Mayer\footnote{Front-end and interaction.}}
+\affil[1]{EPFL IC IINFCOM LARA, INR 318, Station 14, CH-1015 Lausanne\\
+  \texttt{mikael.mayer@epfl.ch}}
+\author[1]{Jad Hamza\footnote{Algorithm implementation.}}
+\affil[1]{EPFL IC IINFCOM LARA, INR 318, Station 14, CH-1015 Lausanne\\
+  \texttt{jad.hamza@epfl.ch}}
+\author[1]{Viktor Kuncak}
+\affil[1]{EPFL IC IINFCOM LARA, INR 318, Station 14, CH-1015 Lausanne\\
+  \texttt{viktor.kuncak@epfl.ch}}
+\authorrunning{M. Mayer, J. Hamza and V. Kuncak}
+
+\Copyright{Mika\"el Mayer, Jad Hamza, Viktor Kuncak}
+% LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{F.3.1 Specifying and Verifying and Reasoning about Programs -- D.3.4 Processors}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation" -- ARTIFACT: You may use the same as the corresponding ECOOP paper.
+
+\keywords{programming by example, active learning, program synthesis}% mandatory: Please provide 1-5 keywords -- ARTIFACT: You may use the same as the corresponding ECOOP paper.
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{3}
+\Issue{2}
+\Article{16}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This artifact, named {\tt Prosy}, is an interactive command-line tool for synthesizing recursive tree-to-string functions (e.g. pretty-printers) from examples.
+  Specifically, Prosy takes as input a Scala file containing a hierarchy of abstract and case classes, and synthesizes the printing function after interacting with the user.
+  Prosy first pro-actively generates a finite set of trees such that their string representations uniquely determine the function to synthesize.
+  While asking the output for each example, Prosy prunes away questions when it can infer their answers from previous answers.
+  In the companion paper, we prove that this pruning allows Prosy not to require that the user provides answers to the entire set of questions, which is of size $O(n^3)$ where $n$ is the size of the input file, but only to a reasonably small subset of size $O(n)$.
+  Furthermore, Prosy guides the interaction by providing suggestions whenever it can.
+ \end{abstract}
+
+% ARTIFACT: please stick to the structure of 7 sections provided below
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+  We designed this artifact to support repeatability of all the experiments of the 
+  companion paper, allowing users to test the interaction on the benchmarks of the evaluation section in the companion paper.
+  Users can verify the number of questions and their variety (suggestion, multiple-choice, raw) for each benchmark.
+  In particular, users can verify that the number of questions Prosy asked ($O(n)$) is much smaller than the initial set of questions ($O(n^3)$), and that both the number of questions and their inputs vary depending on the answers.
+  Furthermore, users can also test the interaction on more benchmarks and create their own benchmarks.
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+  The artifact package is a zip file including:
+  \begin{itemize}
+  \item Instructions on how to rebuild the artifact from scratch (README.md).
+  \item Detailed instructions for using the artifact (WALKTHROUGH.md)
+  \item The sources which can be recompiled from scratch using SBT.
+  \item A JAR file which can be used directly as described in WALKTHROUGH.md
+  \end{itemize}
+\end{content} 
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artifact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artifact (e.g., on github)
+  The latest version of our code is available on GitHub:
+  {\url https://github.com/epfl-lara/prosy}.
+\end{getting} 
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+  The artifact is known to work on any platform running Java 8, thus including Windows, Linux and Mac OS.
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{EPL-1.0 ({\url http://www.eclipse.org/legal/epl-v10.html})}
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{563754F491D8DFF20BF47953BEAC8CD1}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{6 MB}
+
+%\subparagraph*{Acknowledgements}
+
+%The authors wish to thank \dots
+
+% ARTIFACT: optional appendix
+%\appendix
+
+%\section{My Appendix}
+
+% Add here any further material you would like to include. For instance, if the artifact is itself a PDF document, add it here.
+
+
+% ARTIFACT: include here any additional references, if needed...
+
+%% Either use bibtex (recommended), but commented out in this sample
+
+%\bibliography{dummybib}
+
+%% .. or use the thebibliography environment explicitely
+
+%\nocite{Simpson}
+
+%\begin{thebibliography}{50}
+%\bibitem{Simpson} Homer J. Simpson. \textsl{Mmmmm...donuts}. Evergreen Terrace Printing Co., Springfield, Somewhere, USA, 1998
+%\end{thebibliography}
+
+
+\end{document}
