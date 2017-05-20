@@ -1,0 +1,133 @@
+\documentclass[a4paper,UKenglish]{darts}
+
+\usepackage{microtype}
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ARTIFACT: Please use the same title as the corresponding ECOOP paper and append the text "(Artifact)"
+% ARTIFACT: Add as a footnote the reference to the corresponding ECOOP paper
+\title{Mixed Messages: Measuring Conformance and Non-Interference in
+  TypeScript (Artifact)\footnote{This artifact is a companion of the
+    paper: Jack Williams, J. Garrett Morris, Philip Wadler, and Jakub
+    Zalewski, ``Mixed Messages: Measuring Conformance and
+    Non-Interference in TypeScript'', Proceedings of the 31st European
+    Conference on Object-Oriented Programming (ECOOP 2017), June
+    18-23, 2017, Barcelona, Spain.}}  \titlerunning{Mixed Messages:
+  Measuring Conformance and Non-Interference in TypeScript (Artifact)}
+
+\author[1]{Jack Williams\footnote{Core artifact developer.}}
+\affil[1]{University of Edinburgh\\
+  \texttt{jack.williams@ed.ac.uk}}
+\author[2]{J. Garrett Morris}
+\affil[2]{University of Edinburgh\\
+  \texttt{Garrett.Morris@ed.ac.uk}}
+\author[3]{Philip Wadler}
+\affil[3]{University of Edinburgh\\
+  \texttt{wadler@inf.ed.ac.uk}}
+\author[4]{Jakub Zalewski}
+\affil[4]{University of Edinburgh\\
+  \texttt{jakub.zalewski@ed.ac.uk}}
+
+\authorrunning{J. Williams, J. G. Morris, P. Wadler, and J.
+  Zalewski}
+
+\Copyright{Jack Williams, J. Garrett Morris, Philip Wadler, and Jakub
+  Zalewski}
+
+\subjclass{D.2.5 [\textit{Software Engineering}]: Testing and Debugging}
+
+\keywords{Gradual Typing, TypeScript, JavaScript, Proxies}
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{3}
+\Issue{2}
+\Article{8}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  In the paper \textit{Mixed Messages: Measuring Conformance and
+    Non-Interference in TypeScript} we present our experiences of
+  evaluating gradual typing using our tool TypeScript TPD. The tool,
+  based on the polymorphic blame calculus, monitors JavaScript
+  libraries and TypeScript clients against the corresponding
+  TypeScript definition. Our experiments yield two conclusions. First,
+  TypeScript definitions are prone to error. Second, there are serious
+  technical concerns with the use of the JavaScript proxy mechanism
+  for enforcing contracts. This artifact includes all the libraries we
+  tested, their definition files, and the source code of our
+  tool. From this, all libraries can be wrapped and tested to
+  reproduce the log data that formed our conclusion. All conformance
+  errors and examples of interference are documented, and can be
+  verified against the generated logs.
+ \end{abstract}
+
+ \begin{scope}
+   The aim of the artifact is to enable the reproduction of
+   conformance errors and examples of interference found through the
+   use of TPD. All libraries can be wrapped with TPD and tested to
+   produce logs that match the tables presented in the paper.
+\end{scope}
+
+\begin{content}
+  The artifact is provided as VirtualBox disk image running Ubuntu
+  16.04.  Accompanying the disk image is a detail guide on how to
+  load, run, and evaluate the artifact, provided as a {\tt README.html}
+  file. The main components of the virtual machine are:
+  \begin{itemize}
+  \item The source code of TypeScript TPD that can be compiled and executed.
+  \item The 122 libraries that can be wrapped and tested to generate the logs,
+    from which, the examples are taken.
+  \item The examples of type-errors and interference collected and recorded.
+  \item A small test program that includes examples from the paper. 
+  \end{itemize}
+  To simplify use of the artifact, all libraries and dependencies are
+  pre-installed on the virtual machine. Scripts are provided to
+  automate the process of wrapping the libraries, testing the
+  libraries, and producing the tables from the paper. A skeleton
+  library, client, and definition file are included to allow users to
+  experiment with the tool. All stages are described in detail in the
+  accompanying \texttt{README.html} file.
+  
+\end{content} 
+
+\begin{getting}
+\end{getting} 
+
+\begin{platforms}
+  The artifact is known to work on any platform running Oracle
+  VirtualBox version~5 (\url{https://www.virtualbox.org/}) with at
+  least 20~GB of free space on disk and at least 4~GB of free space in
+  RAM.  Import the image using \texttt{File > Import Appliance}.
+\end{platforms}
+
+\license{MIT (\url{http://opensource.org/licenses/MIT})}
+
+\mdsum{b5a1d04103fbd86820b32168ebb0504f}
+
+\artifactsize{5.1 GB}
+
+\subparagraph*{Acknowledgements}
+This work was supported by Microsoft Research through its PhD
+Scholarship Programme, and by EPSRC grants EP/K034413/1 and
+EP/L01503X/1.  The authors wish to thank anonymous reviewers of the
+paper and artifact.
+
+
+\end{document}
