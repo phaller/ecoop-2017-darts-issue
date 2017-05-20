@@ -1,0 +1,114 @@
+% This is a template for producing artifact descriptions associated with ECOOP 2017 papers
+%
+% Following is the notice from Camil Demetrescu's ECOOP 2016 template on which this
+% template is based:
+% This is a template for producing artifact descriptions associated with ECOOP papers
+% Adapted from the standard LIPIcs template by Camil Demetrescu
+% See lipics-manual.pdf for further information.
+% April 22, 2015
+
+\documentclass[a4paper,UKenglish]{darts}
+% for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+% for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+ 
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% ARTIFACT
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ARTIFACT: Please use the same title as the corresponding ECOOP paper and append the text "(Artifact)"
+% ARTIFACT: Add as a footnote the reference to the corresponding ECOOP paper
+\title{A Capability-Based Module System\newline for Authority Control (Artifact)\footnote{This artifact is a companion of the paper:  Darya Melicher, Yangqingwei Shi, Alex Potanin, and Jonathan Aldrich, ``A Capability-Based Module System for Authority Control'', Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain. This work was supported in part by NSA lablet contract \#H98230-14-C-0140 and by Oracle Labs Australia.}}
+\titlerunning{A Capability-Based Module System for Authority Control (Artifact)} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the ECOOP paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the ECOOP companion paper
+%% Please provide for each author the \author and \affil macro, even when authors have the same affiliation, i.e. for each author there needs to be the  \author and \affil macros
+\author[1]{Darya Melicher}
+\author[2]{Yangqingwei Shi}
+\author[3]{Alex Potanin}
+\author[4]{\\Jonathan Aldrich}
+\affil[1]{Carnegie Mellon University, Pittsburgh, PA, USA}
+\affil[2]{Carnegie Mellon University, Pittsburgh, PA, USA}
+\affil[3]{Victoria University of Wellington, Wellington, New Zealand}
+\affil[4]{Carnegie Mellon University, Pittsburgh, PA, USA}
+\authorrunning{D. Melicher, Y. Shi, A. Potanin, and J. Aldrich} %mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
+
+\Copyright{Darya Melicher, Yangqingwei Shi, Alex Potanin, and Jonathan Aldrich}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{D.3.3 Language Constructs and Features}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation" -- ARTIFACT: You may use the same as the corresponding ECOOP paper.
+
+\keywords{Language-based security, capabilities, authority, modules}% mandatory: Please provide 1-5 keywords -- ARTIFACT: You may use the same as the corresponding ECOOP paper.
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{3}
+\Issue{2}
+\Article{1}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This artifact is intended to demonstrate the module system of the Wyvern programming language and consists of a Linux virtual machine with a snapshot of the Wyvern programming language's codebase. The Wyvern codebase contains a test suite that corresponds to the code examples in the paper accompanying the artifact. In addition, the artifact contains a document describing how to compile and run Wyvern programs.
+ \end{abstract}
+
+% ARTIFACT: please stick to the structure of 7 sections provided below
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+The artifact is intended to demonstrate only Wyvern's module system, which is described in the accompanying paper, and not any other feature. Since Wyvern is a research programming language, some features of a full-fledged language are missing. Also, since this artifact is a snapshot of an actively developed programming language, some language features that are not related to the module system may not be bug-free.
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+The artifact consists of an Oracle VirtualBox 5.1 image containing an installation of a 64-bit Ubuntu 16.10 (Yakkety Yak) with a snapshot of the Wyvern programming language's codebase at commit 94d7a8d5696ec1eb2dd88ac62c12b353c98df689 made on April 7, 2017. The Wyvern codebase contains a test suite that corresponds to the code examples in the paper accompanying the artifact. In addition, the artifact contains a PDF document describing how to compile and run Wyvern programs.
+\end{content} 
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artifact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artifact (e.g., on github)
+  The latest version of the Wyvern codebase is available on GitHub: \url{https://github.com/wyvernlang/wyvern}.
+\end{getting} 
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+  The artifact is known to work on any platform running Oracle VirtualBox
+  version~5 (\url{https://www.virtualbox.org/}) with at least 10~GB of free
+  space on disk and at least 2~GB of free space in RAM.
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{GNU General Public License (GPL), Version 2.0 (\url{https://www.gnu.org/licenses/gpl-2.0.html})}
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling 
+% downloaders to check that the file is the expected version and suffered 
+% no damage during download.
+\mdsum{1c10ef1f84e6283f6ce962790da20fcc}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{2.8 GB}
+
+
+\end{document}
