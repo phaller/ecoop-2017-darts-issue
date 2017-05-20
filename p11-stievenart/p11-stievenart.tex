@@ -1,0 +1,90 @@
+\documentclass[a4paper,UKenglish]{darts}
+\usepackage{microtype}
+\bibliographystyle{plainurl}
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\title{Mailbox Abstractions for Static Analysis of Actor Programs (Artifact)\footnote{This artifact is a companion of the paper:  Quentin Stiévenart, Jens Nicolay, Coen De Roover, and Wolfgang De Meuter, ``Mailbox Abstractions for Static Analysis of Actor Programs'', Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain. Quentin Stiévenart is funded by the GRAVE project of the ``Fonds voor Wetenschappelijk Onderzoek'' (FWO Flanders), and Jens Nicolay is funded by the SeCloud project sponsored by Innoviris, the Brussels Institute for Research and Innovation.}}
+\titlerunning{Mailbox Abstractions for Static Analysis of Actor Programs (Artifact)}
+
+
+\author[1]{Quentin Stiévenart}
+\affil[1]{Software Languages Lab, Vrije Universiteit Brussel, Belgium\\
+  \texttt{qstieven@vub.ac.be}}
+\author[2]{Jens Nicolay}
+\affil[2]{Software Languages Lab, Vrije Universiteit Brussel, Belgium\\
+  \texttt{jnicolay@vub.ac.be}}
+\author[3]{Wolfgang De Meuter}
+\affil[3]{Software Languages Lab, Vrije Universiteit Brussel, Belgium\\
+  \texttt{wdmeuter@vub.ac.be}}
+\author[4]{Coen De Roover}
+\affil[4]{Software Languages Lab, Vrije Universiteit Brussel, Belgium\\
+  \texttt{cderoove@vub.ac.be}}
+
+\authorrunning{Q. Stiévenart, J. Nicolay, W. De Meuter, C. De Roover}
+
+\Copyright{Quentin Stiévenart, Jens Nicolay, Wolfgang De Meuter, Coen De Roover}
+
+\subjclass{F.3.2 Semantics of Programming Languages -- Program Analysis}
+\keywords{static analysis, abstraction, abstract interpretation, actors, mailbox}
+
+\Volume{3}
+\Issue{2}
+\Article{11}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This artifact is based on \textsc{Scala-AM}, a static analysis framework relying on the Abstracting Abstract Machines approach. This version of the framework is extended to support actor-based programs, written in a variant of Scheme. The sound static analysis is performed in order to verify the absence of errors in actor-based program, and to compute upper bounds on actor's mailboxes. We developed several mailbox abstractions with which the static analysis can be run, and evaluate the precision of the technique with these mailbox abstractions. This artifact contains documentation on how to use analysis and on how to reproduce the results presented in the companion paper.
+\end{abstract}
+
+\begin{scope}
+  This artifact aims to provide the necessary material to reproduce the experiments in the companion paper. It is an extended version of \textsc{Scala-AM}, a static analysis framework, and perform static analysis on actor-based programs written in a variant of Scheme. The artifact implements the analysis described in the companion paper, as well as the different mailbox abstractions presented.
+\end{scope}
+
+\begin{content}
+  This artifact package includes:
+  \begin{itemize}
+    \item a VirtualBox image containing:
+      \begin{itemize}
+      \item the modified version of \textsc{Scala-AM} with all the dependencies needed,
+      \item the mechanized proofs of soundness with all the dependencies needed,
+      \end{itemize}
+    \item detailed instruction for reproducing the experiments conducted in the companion paper (\code{artifact.pdf}).
+  \end{itemize}
+\end{content}
+
+\begin{getting}
+  The artifact endorsed by the Artifact Evaluation Committee is available free of charge on the Dagstuhl Research Online Publication Server (DROPS).
+  The source code artifact is also accessible at the following addresses:
+  \begin{itemize}
+  \item \url{https://github.com/acieroid/scala-am/tree/ecoop2017actors} for the extended version of \textsc{Scala-AM},
+    \item \url{https://github.com/acieroid/mailbox-abstraction-proofs} for the Coq scripts of the proofs of soundness.
+  \end{itemize}
+  Moreover, the detailed instructions for reproducing the experiments conducted in the companion paper are accessible at \url{https://soft.vub.ac.be/~qstieven/ecoop2017/artifact.pdf}.
+\end{getting}
+
+\begin{platforms}
+  The artifact can be installed on any platform running the Java Virtual Machine, version 6 or more recent. The provided VirtualBox virtual machine image (\code{.vdi}) requires around 7~GB of free space on disk and 2~GB of free RAM.
+\end{platforms}
+
+\license{MIT License (\url{https://opensource.org/licenses/MIT}).}
+
+\mdsum{cccc1c14ec19366c8f99f0a341fbc139}
+
+\artifactsize{1.8~GB}
+
+\end{document}
