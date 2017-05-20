@@ -1,0 +1,128 @@
+\documentclass[a4paper,UKenglish]{darts}
+ 
+\usepackage{microtype}
+
+\bibliographystyle{plainurl}
+
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+\title{Towards Strong Normalization for Dependent Object Types (DOT) (Artifact)\footnote{This artifact is a companion of the paper:  Fei Wang and Tiark Rompf, ``Towards Strong Normalization for Dependent Object Types (DOT)'' ~\cite{DBLP:conf/ecoop/Wang}, Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain. This work was supported in part by NSF through awards 1553471 and 1564207.}}
+\titlerunning{Towards Strong Normalization for Dependent Object Types (DOT) (Artifact)} 
+
+\author[1]{Fei Wang}
+\author[2]{Tiark Rompf\,}
+\affil[1]{Purdue University, USA\\
+  \texttt{wang603@purdue.edu}}
+\affil[2]{Purdue University, USA\\
+  \texttt{tiark@purdue.edu}}
+\authorrunning{F.\,Wang and T.\,Rompf} 
+\Copyright{Fei Wang and Tiark Rompf}
+\subjclass{D.3.3 Language Constructs and Features}
+
+\keywords{Scala, DOT, strong normalization, logical relations, recursive types}
+
+
+\Volume{3}
+\Issue{2}
+\Article{5}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This artifact provides the fully mechanized proof of strong normalization for D$_{<:}$ , a variant of (Dependent Object Types) DOT ~\cite{DBLP:conf/oopsla/RompfA16} that 
+excludes recursive functions and recursive types. The intersection type and recursive self type are further integrated, moving towards DOT. The key proof idea follows the method of Girard and Tait ~\cite{girard1972interpretation, DBLP:journals/jsyml/Tait67}.
+\end{abstract}
+
+
+\begin{scope}
+  The purpose of providing this artifact is to demonstrate the mechanized Coq ~\cite{coq} proof in full detail. The readers can check and make sure that there are no hidden ``admits'' in the proof, and verify that the lemmas and theorems in the paper are well supported by the lemmas and theorems in the proof.
+\end{scope}
+
+\begin{content}
+  The artifact package includes:
+  \begin{itemize}
+  \item \texttt{SfLib.v}, the software foundation library used in this artifact. 
+  \item \texttt{dsubsup\_total.v}, the strong normalization proof for D$_{<:}$, closely matching the presentation in Section 3 of the companion paper. 
+  \item \texttt{dsubsup\_total\_rec.v}, the strong normalization proof for D$_{<:}$ with recursive self type and intersection type, closely matching the presentation in Section 4 of the companion paper. 
+  \item \texttt{Makefile}
+  \item \texttt{README.md}
+  \end{itemize}
+  
+Appendix A of the companion paper describes the correspondence between the formalism on paper and the development in Coq. Lemma 3 and Theorem 4 of the companion paper are not included in the artifact because they are about System F$_{<:}$, not System D$_{<:}$. The corresponding lemma and theorem in System D$_{<:}$ are more powerful. 
+  
+To run and verify our artifact, install ``coqc --version 8.6'' with
+
+\begin{lstlisting}[language=Scala]
+brew install coq
+\end{lstlisting} 
+(for Mac OS), or, follow the instructions on the webpage {\url https://coq.inria.fr/download}. No extra environment set-up is needed. After installation, change directory to the artifact, and run 
+
+\begin{lstlisting}[language=Scala]
+make
+\end{lstlisting} 
+in the console. The expected result is that it takes about 10 minutes to finish, and there are no error messages. The literal expected console output is in Figure ~\ref{fig:expect}.
+\begin{figure}
+\medskip
+\lstset{language=Scala}
+\begin{lstlisting}[language=Scala]
+  COQDEP dsubsup_total_rec.v
+  COQDEP dsubsup_total.v
+  COQDEP SfLib.v
+  COQC SfLib.v
+  COQC dsubsup_total.v
+  COQC dsubsup_total_rec.v
+\end{lstlisting}
+\caption{\label{fig:expect}Expected result of successfully running the artifact}
+\end{figure}
+
+If the readers are interested in reviewing the proof in CoqIde or other interpreters, and stepping through the proof, the readers should run 
+\begin{lstlisting}[language=Scala]
+coqc SfLib.v
+\end{lstlisting}
+in the artifact directory, before stepping through the proof. The command will generate a compiled library at the local directory. Otherwise, an error of 
+\begin{lstlisting}[language=Scala]
+The file /path/to/artifact/SfLib.vo contains library Top.SfLib 
+and not library SfLib
+\end{lstlisting}
+may occur. For some background about the potential error, it is because the makefile (which we auto-generated using default flags with the standard \texttt{coq\_makefile} command) introduces a designated ``Top'' scope, while ``coqc'' assumes no such scope by default. It is possible to use this ``Top'' scope manually by passing the ``-R'' flag, as in \texttt{coqc -R / Top dsubsup\_total.v}.
+
+In \texttt{dsubsup\_total\_rec.v}, the \texttt{val\_type\_unfold} lemma is ``admitted'' for performance reasons. The commented proof for that lemma takes Coq an hour or more to complete (for reasons that are not clear). However, the right-hand side of \texttt{val\_type\_unfold} has been copied and pasted literally from \texttt{val\_type} (which the readers may verify), so there is no question about the validity of the lemma.
+
+\end{content} 
+
+\begin{getting}
+  The latest version of our code is available on the website:
+  {\url https://github.com/TiarkRompf/minidot/tree/master/ecoop17}
+\end{getting} 
+
+\begin{platforms}
+  The artifact is known to work on any platform running Coq version 8.6 ({\url https://coq.inria.fr/download/}). 
+\end{platforms}
+
+\license{CC BY 3.0 DE}
+
+\mdsum{3bc74da5f2828e59e9df5f8f7993baf6}
+
+\artifactsize{40.5 KB}
+
+\subparagraph*{Acknowledgements}
+
+The authors wish to thank Nada Amin, Martin Odersky, Sandro Stucki, and the anonymous ECOOP
+reviewers. This research was supported by NSF through awards 1553471 and 1564207.
+
+
+\bibliography{p05-wang}
+
+
+\end{document}
