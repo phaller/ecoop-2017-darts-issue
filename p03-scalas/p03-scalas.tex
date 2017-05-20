@@ -1,0 +1,270 @@
+% This is a template for producing artifact descriptions associated with ECOOP 2017 papers
+%
+% Following is the notice from Camil Demetrescu's ECOOP 2016 template on which this
+% template is based:
+% This is a template for producing artifact descriptions associated with ECOOP papers
+% Adapted from the standard LIPIcs template by Camil Demetrescu
+% See lipics-manual.pdf for further information.
+% April 22, 2015
+
+\documentclass[a4paper,UKenglish]{darts}
+% for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+% for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+% for section-numbered lemmas etc., use "numberwithinsect"
+
+\usepackage{microtype}%if unwanted, comment out or use option "draft"
+\usepackage{xspace}% Smart spaces for macros
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\bibliographystyle{plainurl}% the recommended bibstyle
+
+% ARTIFACT
+\newenvironment{scope}{\section{Scope}}{}
+\newenvironment{content}{\section{Content}}{}
+\newenvironment{getting}{\section{Getting the artifact} The artifact 
+endorsed by the Artifact Evaluation Committee is available free of 
+charge on the Dagstuhl Research Online Publication Server (DROPS).}{}
+\newenvironment{platforms}{\section{Tested platforms}}{}
+\newcommand{\license}[1]{{\section{License}#1}}
+\newcommand{\mdsum}[1]{{\section{MD5 sum of the artifact}#1}}
+\newcommand{\artifactsize}[1]{{\section{Size of the artifact}#1}}
+
+% Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ARTIFACT: Please use the same title as the corresponding ECOOP paper and append the text "(Artifact)"
+% ARTIFACT: Add as a footnote the reference to the corresponding ECOOP paper
+\title{A Linear Decomposition of Multiparty Sessions for Safe Distributed Programming (Artifact)%
+  \footnote{This artifact is a companion of the paper: %
+  A.~Scalas, O.~Dardha, R.~Hu, N.~Yoshida, ``A Linear Decomposition of Multiparty Sessions for Safe Distributed Programming'', %
+  Proceedings of the 31st European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain. %
+  This  work was supported in part by %
+  EPSRC (grants EP/K034413/1,
+  EP/K011715/1, EP/L00058X/1, EP/N027833/1, EP/N028201/1) and %
+  EU (FP7 612985 ``Upscale''). %(Upcale)
+  %
+  Dardha %
+  was awarded a %
+  Postdoctoral and Early Career Researcher Exchange (PECE) bursary %
+  by the Scottish Informatics Computer Science Alliance (SICSA) %
+  for visiting Imperial College London in January--March 2016.
+}}
+\titlerunning{A Linear Decomposition of Multiparty Sessions (Artifact)} %optional, in case that the title is too long; the running title should fit into the top page column
+
+% ARTIFACT: Authors may not be exactly the same as the ECOOP paper, e.g., you may want to include authors who contributed to the preparation of the artifact, but not to the ECOOP companion paper
+%% Please provide for each author the \author and \affil macro, even when authors have the same affiliation, i.e. for each author there needs to be the  \author and \affil macros
+\author[1]{Alceste Scalas}%
+\author[2]{Ornela Dardha}%
+\author[3]{Raymond Hu}%
+\author[4]{Nobuko Yoshida}%
+\affil[1]{Imperial College London, UK\\
+  \texttt{alceste.scalas@imperial.ac.uk}
+}%
+\affil[2]{University of Glasgow, UK\\
+  \texttt{ornela.dardha@glasgow.ac.uk}%
+}%
+\affil[3]{Imperial College London, UK\\
+  \texttt{raymond.hu@imperial.ac.uk}%
+}%
+\affil[4]{Imperial College London, UK\\
+  \texttt{n.yoshida@imperial.ac.uk}
+}%
+\authorrunning{A.~Scalas, O.~Dardha, R.~Hu, N.~Yoshida}%mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
+
+\Copyright{Alceste Scalas, Ornela Dardha, Raymond Hu, and Nobuko Yoshida}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\subjclass{D.1.3 Concurrent Programming; D.3.1 Formal Definitions and Theory; F.3.3 Studies of Program Constructs --- Type structure}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation".
+
+\keywords{process calculi, session types, concurrent programming, Scala}% mandatory: Please provide 1-5 keywords
+
+% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Volume{3}
+\Issue{2}
+\Article{3}
+\RelatedConference{European Conference on Object-Oriented Programming (ECOOP 2017), June 18-23, 2017, Barcelona, Spain}
+% Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This artifact contains a version of the Scribble tool %
+  that, given a protocol specification with multiple participants, %
+  can generate Scala APIs %
+  for implementing each participant in a type-safe, protocol-abiding way.
+  %
+  Crucially, the API generation leverages a \emph{decomposition} %
+  of the multiparty protocol into type-safe peer-to-peer interactions %
+  between pairs of participants; %
+  and this, in turn, %
+  allows to implement the API internals %
+  on top of the existing \texttt{lchannels} library %
+  for type-safe \emph{binary} session programming. %
+  As a result, %
+  several technically challenging aspects %
+  in the implementation of multiparty sessions %
+  are solved ``for free'', at the underlying binary level. %
+  This includes \emph{distributed multiparty session delegation}: %
+  this artifact implements it for the first time. %
+\end{abstract}
+
+% ARTIFACT: please stick to the structure of 7 sections provided below
+
+% ARTIFACT: section on the scope of the artifact (what claims of the paper are intended to be backed by this artifact?)
+\begin{scope}
+  This artifact presents an application %
+  of the formal \emph{multiparty-to-binary session decomposition} %
+  studied in the companion paper. %
+
+  This artifact shows that %
+  the theoretical results of the companion paper %
+  provide the basis %
+  for automatically generating Scala APIs %
+  for type-safe distributed programming. %
+  %
+  Moreover, the artifact shows that %
+  such a theoretically-grounded approach %
+  brings a relevant technical simplification %
+  over previous implementations of multiparty sessions: %
+  the generated APIs contain very little logic, %
+  and are just a thin layer %
+  on top of the existing \texttt{lchannels} library %
+  \cite{ScalasY16,ScalasY16Artifact}, %
+  that handles many irksome issues. %
+  %
+  This simplification yields, in particular, %
+  the first implementation of \emph{distributed multiparty delegation}.
+
+  Technically, the API generation has been implemented by extending %
+  the Scribble tool~\cite{HY16}.
+\end{scope}
+
+% ARTIFACT: section on the contents of the artifact (code, data, etc.)
+\begin{content}
+  The artifact package includes:
+  \begin{itemize}
+  \item%
+    the source code of %
+    the Scribble tool~\cite{HY16}, %
+    extended with support for \emph{type projection and merging} %
+    and Scala API generation, %
+    based on the theory developed in the companion paper %
+    (see, in particular, \S\,7);%
+  \item%
+    the source code of the \texttt{lchannels} library~%
+    \cite{ScalasY16,ScalasY16Artifact};%
+  \item%
+    several examples of multiparty protocols (in Scribble notation), %
+    including the main running example of the companion paper;%
+  \item%
+    working Scala implementations of the aforementioned example protocols, %
+    written by using the Scribble-generated Scala APIs;%
+  \item%
+    a ready-to-use VirtualBox disk image %
+    containing an Ubuntu 16.04 installation, %
+    fully configured for testing our artifact. %
+    The disk image also includes an easy-to-use graphical tool %
+    for demoing the protocol examples above;
+  \item%
+    an \texttt{index.html} file %
+    with detailed instructions describing %
+    the VirtualBox disk image, %
+    the graphical demo tool, %
+    the (extended) Scribble syntax, %
+    how to use the Scribble from the command line, %
+    how the various examples work, %
+    and how to navigate the implementation source code.
+  \end{itemize}
+\end{content}
+
+% ARTIFACT: section containing links to sites holding the
+% latest version of the code/data, if any
+\begin{getting}
+% leave empty if the artifact is only available on the DROPS server.
+% otherwise, provide links to the latest version of the artifact (e.g., on github)
+  The latest version of our code %
+  is available on following websites and repositories:
+  \begin{itemize}
+  \item%
+    Scribble:
+    \begin{itemize}
+    \item%
+      main website: \url{http://scribble.org/}
+    \item%
+      repository with Scala API generation support: %
+      \url{https://github.com/alcestes/scribble-java/tree/linear-channels}%
+    \item%
+      \textbf{NOTE}: the repository link above %
+      points to the \texttt{linear-channels} development branch. %
+      We expect that
+      this branch %
+      will be eventually integrated in the main Scribble repository.
+    \end{itemize}
+  \item%
+    \texttt{lchannels}: %
+    \begin{itemize}
+    \item%
+      website: \url{http://alcestes.github.io/lchannels/}%
+    \item%
+      repository: \url{https://github.com/alcestes/lchannels}%
+    \end{itemize}
+  \end{itemize}
+\end{getting}
+
+% ARTIFACT: section specifying the platforms on which the artifact is known to
+% work, including requirements beyond the operating system such as large
+% amounts of memory or many processor cores
+\begin{platforms}
+  The artifact disk image %
+  is known to work on any platform running Oracle VirtualBox
+  version~4 or 5 (\url{https://www.virtualbox.org/}) %
+  with 5~GB of free disk space %
+  and 2~GB of free RAM.
+
+  Scribble should compile on any platform running Java 8 and Maven 3.3
+  (\url{https://maven.apache.org/}), using the standard build procedure.
+
+  \texttt{lchannels} should compile on any platform running Java 8
+  and the Scala Build Tool 0.13 %
+  (\url{http://scala-sbt.org/}).
+\end{platforms}
+
+% ARTIFACT: section specifying the license under which the artifact is
+% made available
+\license{%
+  \begin{itemize}%
+  \item%
+    Scribble is released under the Apache License version 2.0 %
+    (\url{http://www.apache.org/licenses/LICENSE-2.0.html}).%
+  \item%
+    \texttt{lchannels} is released under %
+    the BSD 2-clause License %
+    (\url{https://opensource.org/licenses/BSD-2-Clause}).
+  \end{itemize}
+}%
+
+% ARTIFACT: section specifying the md5 sum of the artifact master file
+% uploaded to the Dagstuhl Research Online Publication Server, enabling
+% downloaders to check that the file is the expected version and suffered
+% no damage during download.
+\mdsum{ae0ea460fbe40c7a96abba0913fe546c}
+
+% ARTIFACT: section specifying the size of the artifact master file uploaded
+% to the Dagstuhl Research Online Publication Server
+\artifactsize{1.6 GB.}
+
+\subparagraph*{Acknowledgements}
+
+The authors wish to thank %
+Sung-Shik Jongmans, %
+Rumyana Neykova, %
+Nicholas Ng, %
+and Bernardo Toninho %
+for testing the artifact, %
+and the anonymous artifact reviewers for their comments and suggestions.
+
+\bibliography{p03-scalas}%
+
+\end{document}
